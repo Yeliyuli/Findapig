@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="heading"> Найди поросёнка!</h1>
+    <img id="map" width=600 heigth = 600 src = "https://i.pinimg.com/736x/ad/a8/00/ada800b2e2f4a3fde60087b93fc6839d--gravity-falls-waddles-gravitty-falls.jpg" alt="Карта">
+    <p id = "distance"></p>
+
+    <script src="https://code.jquery.com/jquery-2.1.0.js"></script>
+
+    <script>
+
+let getRandomNumber = function (size) {
+    return Math.floor(Math.random()*size);
+};
+let getDistance = function (event, target) {
+    var difFX = event.offsetX-target.x;
+    var difFY = event.offsetY-target.y;
+    return Math.sqrt((difFX*difFX)+(difFY*difFY));
+};
+let getDistanceHint = function (distance) {
+    if (distance<30) {
+        return "Ойй ёйй ёйй как близко!";
+    } else if (distance<40) {
+        return "Ух! Горячо!";
+    
+    } else if (distance<60) {
+        return "Уже становится горячо!";
+    
+    } else if (distance<100) {
+        return "Продолжай, ты близко!";
+    
+    } else if (distance<150) {
+        return "Продолжай, ещё теплее!";
+    
+    } else if (distance<200) {
+        return "Ещё теплее!";
+    
+    } else if (distance<250) {
+        return "Тепло!";
+            
+    } else if (distance<350) {
+        return "Прохладно!";
+
+    } else if (distance<500) {
+        return "Всё ещё холодно!";
+
+    } else if (distance<600) {
+        return "Бррр холодно!";
+    }
+    };
+
+let width = 600;
+let height = 600;
+let clicks = 0;
+
+let target = {
+    x: getRandomNumber(width),
+    y: getRandomNumber(height) };
+
+    $("#map").click (function(event) {
+        clicks++;
+        let distance = getDistance (event,target);
+        let distanceHint = getDistanceHint (distance);
+        $("#distance").text(distanceHint);
+
+        if (distance<20) {
+            alert ("Нужный поросенок обнаружен!!! с " + clicks+ "попытки");
+
+        }
+    });
+  
+    </script>
+</body>
+</html>
